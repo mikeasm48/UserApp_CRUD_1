@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Users</title>
+</head>
+<body>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>NAME</th>
+    <th>EMAIL</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr th:each="user : ${users}">
+    <td><a th:href="@{/users/{id}(id=${user.getId()})}" th:text="${user.getId()}"></a></td>
+    <td><a th:href="@{/users/{id}(id=${user.getId()})}" th:text="${user.getName()}"></a></td>
+    <td><a th:href="@{/users/{id}(id=${user.getId()})}" th:text="${user.getEmail()}"></a></td>
+    <td>
+<!--      <a th:href="@{/users/{id}/edit(id=${user.getId()})}" th:text="Edit"></a>-->
+      <form th:action="@{/users/edit}">
+        <button type="submit" th:name="id" th:value="${user.id}">Edit</button>
+      </form>
+    </td>
+    <td>
+<!--      <a th:href="@{/users/{id}/delete(id=${user.getId()})}" th:text="Delete"></a>-->
+      <form method="post" th:action="@{/users/delete}">
+        <button type="submit" th:name="id" th:value="${user.id}">Delete</button>
+      </form>
+    </td>
+  </tr>
+</table>
+</body>
+</html>
